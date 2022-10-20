@@ -1,7 +1,7 @@
 base:
   random_state: 42
 
-data:
+data_load:
   # loading data 
   dataset_csv: 'data/raw/iris.csv'
   features_path: 'data/processed/featured_iris.csv'

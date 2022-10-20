@@ -14,13 +14,13 @@ def data_load(config_path: Text) -> None:
     Args:
         config_path {Text}: Path to config file
     """
-    with open("params.yaml") as config_path:
+    with open(config_path) as config_path:
         config = yaml.safe_load(config_path)
 
     data = load_iris(as_frame=True)
     dataset = data.frame
     dataset.columns = [colname.strip(' (cm)').replace(' ', '_') for colname in dataset.columns.tolist()]
-    dataset.to_csv(config["data"]["dataset_csv"], index=False)
+    dataset.to_csv(config['data_load']['dataset_csv'], index=False)
 
     print("Data Loading Done. \n")
 
