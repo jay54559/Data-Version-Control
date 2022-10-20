@@ -1,10 +1,9 @@
 """
-This is the module for data featurzing
+This is the module for data featurizing
 Stage 2 in pipeline
 """
 
 import argparse
-import re
 import pandas as pd
 import yaml
 from typing import Text
@@ -17,7 +16,7 @@ def featurize(config_path: Text) -> None:
     with open(config_path) as config_path:
         config = yaml.safe_load(config_path)
     
-    dataset = pd.read_csv(config['data_load']['dataset_csv'])
+    dataset = pd.read_csv(config['data']['dataset_csv'])
     dataset['sepal_length_to_sepal_width'] = dataset['sepal_length'] / dataset['sepal_width']
     dataset['petal_length_to_petal_width'] = dataset['petal_length'] / dataset['petal_width']
     dataset = dataset[[
@@ -25,8 +24,7 @@ def featurize(config_path: Text) -> None:
     'sepal_length_to_sepal_width', 'petal_length_to_petal_width',
     'target'
     ]]
-
-    dataset.to_csv(config['data_load']['features_path'], index=False)
+    dataset.to_csv(config['data']['features_path'], index=False)
 
     print("Data Featurization Done.\n")
 
