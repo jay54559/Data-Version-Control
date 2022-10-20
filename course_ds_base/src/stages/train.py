@@ -10,9 +10,9 @@ from sklearn.model_selection import train_test_split
 import argparse
 import joblib
 from sklearn.linear_model import LogisticRegression
+from src.train.train import train
 
-
-def train(config_path: Text) -> None:
+def train_model(config_path: Text) -> None:
     """ Train the model
     Args:
          config_path {Text}: Path to config file
@@ -22,16 +22,18 @@ def train(config_path: Text) -> None:
         config = yaml.safe_load(config_path)
     
     train_dataset = pd.read_csv(config['data']['trainset_path'])
+    estimator_name = config['train']['estimator_name']
+    model = train(df=train_dataset,
+                  target_column=config['featurize']['target_column'],
+                  estimator_name=estimator_name,
+                  param_grid=config['train']['estimators'][estimator_name]['param_grid'],
+                  cv=config['train']['cv']
 
-    X_train = train_dataset.drop('target', axis=1).values.astype('float32')
-    y_train = train_dataset.loc[:, 'target'].values.astype('int32')
+    )
     
-    logreg = LogisticRegression(**config['train']['clf_params'], random_state=config['base']['random_state'])
-    logreg.fit(X_train, y_train)
+    joblib.dump(model, config['train']['model_path'])
 
-    joblib.dump(logreg, config['train']['model_path'])
-
-    print("Model training done.\n")
+    print("Model training done. Model saved.\n")
 
 
 if __name__=="__main__":
@@ -39,4 +41,4 @@ if __name__=="__main__":
     args_parser.add_argument('--config', dest='config', required=True)
     args = args_parser.parse_args()
 
-    train(config_path=args.config)
+    train_model(config_path=args.config)
