@@ -14,6 +14,7 @@ def data_load(config_path: Text) -> None:
     Args:
         config_path {Text}: Path to config file
     """
+    print("Loading raw data...")
     with open(config_path) as config_path:
         config = yaml.safe_load(config_path)
 
@@ -22,7 +23,7 @@ def data_load(config_path: Text) -> None:
     dataset.columns = [colname.strip(' (cm)').replace(' ', '_') for colname in dataset.columns.tolist()]
     dataset.to_csv(config['data']['dataset_csv'], index=False)
 
-    print("Data Loading Done. \n")
+    print("Data loading done. \n")
 
 if __name__ == "__main__":
     args_parser = argparse.ArgumentParser(description="Process the config file")

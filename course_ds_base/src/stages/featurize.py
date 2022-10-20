@@ -13,6 +13,7 @@ def featurize(config_path: Text) -> None:
     Args:
         config_path {Text}: Path to config file
     """
+    print("Featurizing raw data...")
     with open(config_path) as config_path:
         config = yaml.safe_load(config_path)
     
@@ -26,7 +27,7 @@ def featurize(config_path: Text) -> None:
     ]]
     dataset.to_csv(config['data']['features_path'], index=False)
 
-    print("Data Featurization Done.\n")
+    print("Data featurization done.\n")
 
 if __name__=='__main__':
     args_parser = argparse.ArgumentParser(description="Process the config file")

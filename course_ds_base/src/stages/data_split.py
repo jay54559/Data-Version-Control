@@ -14,6 +14,7 @@ def data_split(config_path: Text) -> None:
     Args:
         config_path {Text}: Path to config file
     """
+    print("Splitting the featurized dataset into train and test sets...")
     with open(config_path) as config_path:
         config = yaml.safe_load(config_path)
 
