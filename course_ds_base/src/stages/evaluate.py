@@ -52,3 +52,10 @@ def evaluate_model(config_path: Text) -> None:
     cm_plot.savefig(config['reports']['confusion_matrix_image'])
 
     print("Model evaluated. Metric and confusion matrix saved.\n")
+
+if __name__=="__main__":
+    args_parser = argparse.ArgumentParser(description="Process the config file")
+    args_parser.add_argument('--config', dest='config', required=True)
+    args = args_parser.parse_args()
+
+    evaluate_model(config_path=args.config)
