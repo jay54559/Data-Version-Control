@@ -9,7 +9,6 @@ from typing import Text
 from sklearn.model_selection import train_test_split
 import argparse
 import joblib
-from sklearn.linear_model import LogisticRegression
 from src.train.train import train
 
 def train_model(config_path: Text) -> None:
