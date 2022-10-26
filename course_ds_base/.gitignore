@@ -1,2 +1,23 @@
 /file.txt
 /datadir
+# IDEs
+.idea
+.vscode
+
+## OS configs
+.DS_Store
+
+# Project
+data/*
+models/*
+reports/*
+
+# Python
+__pycache__
+.ipynb_checkpoints
+
+# Venv
+dvc-venv
+
+.python-version
+.venv/
