@@ -87,7 +87,7 @@ stages:
         base:
           random_state: 42
         train:
-          estimator_name: logreg
+          estimator_name: knn
           estimators:
             logreg:
               param_grid:
@@ -102,7 +102,9 @@ stages:
             svm:
               param_grid:
                 C:
-                - 0.01
+                - 0.1
+                - 0.001
+                - 0.1
                 kernel:
                 - rbf
                 degree:
@@ -112,13 +114,16 @@ stages:
             knn:
               param_grid:
                 n_neighbors:
+                - 3
+                - 4
+                - 5
                 - 6
           model_path: models/model.joblib
           cv: 5
     outs:
     - path: models/model.joblib
-      md5: d50a2fe0988f85c114235d9abcf6251d
-      size: 3075
+      md5: 2643e8aee56e86f20e7458a26ac02616
+      size: 15983
   evaluate:
     cmd: python src/stages/evaluate.py --config=params.yaml
     deps:
@@ -126,8 +131,8 @@ stages:
       md5: 0f1da7c874a4dfdea4f449048b8c4399
       size: 1593
     - path: models/model.joblib
-      md5: d50a2fe0988f85c114235d9abcf6251d
-      size: 3075
+      md5: 2643e8aee56e86f20e7458a26ac02616
+      size: 15983
     - path: src/stages/evaluate.py
       md5: 46d06cf43316ba0da2e0f22e336dcbd3
       size: 1836
@@ -147,7 +152,7 @@ stages:
           metrics_file: reports/metrics.json
           confusion_matrix_image: reports/confusion_matrix.png
         train:
-          estimator_name: logreg
+          estimator_name: knn
           estimators:
             logreg:
               param_grid:
@@ -162,7 +167,9 @@ stages:
             svm:
               param_grid:
                 C:
-                - 0.01
+                - 0.1
+                - 0.001
+                - 0.1
                 kernel:
                 - rbf
                 degree:
@@ -172,6 +179,9 @@ stages:
             knn:
               param_grid:
                 n_neighbors:
+                - 3
+                - 4
+                - 5
                 - 6
           model_path: models/model.joblib
           cv: 5
