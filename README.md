@@ -20,4 +20,4 @@ The whole training pipeline contains of the following stages:
 4. train: This stage runs the model training, and stores the model.
 5. evaluate: This stage evaluates the model against test data and stores the results including a confusin matrix.
 
-To run the pipeline, change to 
+To run the pipeline, change to dvc-sample1/dvc-sample1 and run `dvc repro`
